@@ -6,15 +6,12 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(
-    prefix="/report",
-    tags=["report"]
-)
+router = APIRouter(prefix="/report", tags=["report"])
+
 
 @router.get("/{tenant_id}", response_model=ReportResponse)
 def get_report(
-    tenant_id: str,
-    report_service: ReportService = Depends(get_report_service)
+    tenant_id: str, report_service: ReportService = Depends(get_report_service)
 ):
     try:
         return report_service.generate_report(tenant_id)
@@ -24,10 +21,10 @@ def get_report(
         logger.error(f"Unexpected error in get_report: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
+
 @router.post("", response_model=ReportResponse)
 def create_report(
-    payload: dict,
-    report_service: ReportService = Depends(get_report_service)
+    payload: dict, report_service: ReportService = Depends(get_report_service)
 ):
     tenant_id = payload.get("tenant_id", "default")
     try:

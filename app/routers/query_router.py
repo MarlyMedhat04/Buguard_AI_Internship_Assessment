@@ -8,15 +8,12 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(
-    prefix="/query",
-    tags=["query"]
-)
+router = APIRouter(prefix="/query", tags=["query"])
+
 
 @router.post("", response_model=QueryResponse)
 def query_assets(
-    request: QueryRequest,
-    query_service: QueryService = Depends(get_query_service)
+    request: QueryRequest, query_service: QueryService = Depends(get_query_service)
 ):
     try:
         return query_service.execute_query(request)
