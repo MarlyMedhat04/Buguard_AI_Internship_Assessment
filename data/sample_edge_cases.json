@@ -1,0 +1,64 @@
+{
+  "tenant_id": "org_buguard_01",
+  "assets": [
+    {
+      "id": "ast_1001",
+      "type": "domain",
+      "value": "production-api.com",
+      "status": "active",
+      "source": "scan",
+      "tags": ["prod", "critical"],
+      "metadata": {
+        "description": "Main production gateway"
+      }
+    },
+    {
+      "id": "ast_1002",
+      "type": "certificate",
+      "value": "CN=production-api.com",
+      "status": "active",
+      "source": "scan",
+      "tags": ["security"],
+      "metadata": {
+        "issuer": "Let's Encrypt",
+        "expires": "2023-01-01" 
+      }
+    },
+    {
+      "id": "ast_1003",
+      "type": "certificate",
+      "value": "CN=staging-api.com",
+      "status": "active",
+      "source": "scan",
+      "tags": ["dev"],
+      "metadata": {
+        "issuer": "DigiCert",
+        "expires": "2026-07-20" 
+      }
+    },
+    {
+      "id": "ast_1004",
+      "type": "ip_address",
+      "value": "192.168.1.50",
+      "status": "stale",
+      "source": "manual",
+      "tags": ["old_server"],
+      "metadata": {}
+    },
+    {
+      "id": "ast_1005",
+      "type": "service",
+      "status": "active",
+      "source": "scan",
+      "tags": [],
+      "metadata": {}
+    }
+  ],
+  "relationships": [
+    {
+      "source": "ast_1002",
+      "target": "ast_1001",
+      "type": "covers"
+    }
+  ]
+}
